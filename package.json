@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
+    "bootstrap": "^4.3.1",
     "electron-log": "^3.0.7",
     "electron-squirrel-startup": "^1.0.0",
     "electron-unhandled": "^3.0.0",
@@ -98,9 +99,9 @@
     "file-loader": "^4.0.0",
     "react": "latest",
     "react-dom": "latest",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.87.3",
-    "styled-components": "^5.0.0-beta.8"
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "reactstrap": "^8.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
