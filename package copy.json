@@ -179,6 +179,13 @@
   "build": {
     "appId": "com.roporter.SOFA",
     "productName": "SOFA",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "robjporter",
+        "repo": "electron-SOFA"
+      }
+    ],
     "mac": {
       "category": "public.app-category.social-networking",
       "darkModeSupport": true,

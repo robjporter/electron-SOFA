@@ -1,3 +1,5 @@
+const path =require('path');  
+
 module.exports = [
   // Add support for native node modules
   {
@@ -29,10 +31,12 @@ module.exports = [
     use: ["style-loader", "css-loader"],
   },
   {
-    test: /\.(jpg|png|svg|ico|icns)$/,
+    test: /\.(jpg|png|gif|svg|ico|icns)$/,
+    exclude: path.resolve(__dirname, './src/assets/fonts'),
     loader: "file-loader",
     options: {
       name: "[path][name].[ext]",
+      outputPath: 'images/'
     },
   },
   {

@@ -1,27 +1,18 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
-import { autoUpdater } from "electron-updater";
 import { is } from "electron-util";
 import unhandled from "electron-unhandled";
 import log from "electron-log";
+
+const config = require('../config')
 
 unhandled();
 
 // Note: Must match `build.appId` in package.json
 app.setAppUserModelId('com.company.SOFA');
 
-// Uncomment this before publishing your first version.
-// It's commented out as it throws an error if there are no published versions.
-autoUpdater.logger = log;
-
 log.info('App starting...');
-
-const FOUR_HOURS = 1000 * 60 * 60 * 4;
-setInterval(() => {
-	autoUpdater.checkForUpdates();
-}, FOUR_HOURS);
-
-autoUpdater.checkForUpdates();
+log.info("PATH: ",__dirname);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -58,7 +49,7 @@ const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
 		width: 1000,
-		height: 800,
+    height: 800,
 		webPreferences: {
 			nodeIntegration: true
 		}
@@ -70,7 +61,7 @@ const createWindow = () => {
 
   // Open the DevTools.
   if( is.development ) {
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools({detach:true});
   }
 
   // Emitted when the window is closed.
@@ -117,31 +108,6 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-autoUpdater.on('checking-for-update', () => {
-	log.info('Checking for update...');
-});
-
-autoUpdater.on('update-available', (info) => {
-	log.info('Update available.');
-});
-
-autoUpdater.on('update-not-available', (info) => {
-	log.info('Update not available.');
-});
-
-autoUpdater.on('error', (err) => {
-	log.info('Error in auto-updater. ' + err);
-});
-
-autoUpdater.on('update-downloaded', (ev, info) => {
-	// Wait 5 seconds, then quit and install
-	// In your application, you don't need to wait 5 seconds.
-	// You could call autoUpdater.quitAndInstall(); immediately
-	setTimeout(function() {
-		autoUpdater.quitAndInstall();  
-	}, 5000);
-});
 
 ipcMain.on('online-status-changed', (event, status) => {
 	console.log(status);
